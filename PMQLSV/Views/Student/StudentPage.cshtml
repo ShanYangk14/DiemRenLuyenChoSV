@@ -1,0 +1,48 @@
+﻿@model PMQLSV.Models.Student
+
+@{
+    ViewData["Title"] = "StudentPage";
+}
+
+<h1>StudentPage</h1>
+
+<div>
+    <h4>Student Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Class)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Major)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Major)
+        </dd>
+    </dl>
+</div>
+<div>
+    <ul>
+        <li>
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        </li>
+        <li>
+            <a asp-action="Index">Back to List</a>
+        </li>
+        <li>
+            <!-- Link to Scores and Reviews page -->
+            <h4>
+                <a asp-action="ScoresAndReviews" asp-route-studentId="@Model.Id">Scores and Reviews</a>
+            </h4>
+        </li>
+    </ul>
+</div>

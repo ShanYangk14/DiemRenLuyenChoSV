@@ -1,0 +1,41 @@
+﻿@model PMQLSV.Models.Student
+
+@{
+    ViewData["Title"] = "Scores and Reviews";
+}
+
+<h1>Scores and Reviews</h1>
+
+<div>
+    <h4>Scores</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Max Grade</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var grade in Model.Grades)
+            {
+                <tr>
+                    <td>@grade.Name</td>
+                    <td>@grade.MaxGrade</td>
+                    <td>@grade.Grade</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h4>Review Content</h4>
+    <div>
+        @foreach (var grade in Model.Grades)
+        {
+            <p>@grade.Info</p>
+            <br />
+        }
+    </div>
+</div>

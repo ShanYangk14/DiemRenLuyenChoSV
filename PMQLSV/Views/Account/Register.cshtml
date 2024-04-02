@@ -1,0 +1,103 @@
+﻿@using System.Security.Claims
+@model PMQLSV.Models.User
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row justify-content-md-center">
+    <div class="col-md-5">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Register</div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FirstName)
+                        @Html.TextBoxFor(m => m.FirstName, "", new { @class = "form-control", @placeholder = "First Name" })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.LastName)
+                        @Html.TextBoxFor(m => m.LastName, "", new { @class = "form-control", @placeholder = "Last Name" })
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge badge-danger" })
+                        @if (ViewBag.error != null)
+                        {
+                            <span class="badge badge-danger">@ViewBag.error</span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.CheckBox("TeacherRole", false, new { @class = "mr-1" })
+                        Teacher
+                        @Html.CheckBox("StudentRole", false, new { @class = "mr-1" })
+                        Student
+                        @Html.CheckBox("AdminRole", false, new { @class = "mr-1" })
+                        Admin
+                    </div>
+                    <div id="studentFields" style="display:none;">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Student.Major)
+                            @Html.TextBoxFor(m => m.Student.Major, "", new { @class = "form-control", @placeholder = "Major" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Class Name")
+                            @Html.TextBox("ClassName", "", new { @class = "form-control", @placeholder = "Class Name" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-danger" value="Register" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('input[name="TeacherRole"]').change(function () {
+                if ($(this).prop('checked')) {
+                    $('input[name="StudentRole"]').prop('checked', false);
+                    $('input[name="AdminRole"]').prop('checked', false);
+                }
+            });
+
+            $('input[name="StudentRole"]').change(function () {
+                if ($(this).prop('checked')) {
+                    $('input[name="TeacherRole"]').prop('checked', false);
+                    $('input[name="AdminRole"]').prop('checked', false);
+                    $('#studentFields').show();
+                } else {
+                    $('#studentFields').hide();
+                }
+            });
+
+            $('input[name="AdminRole"]').change(function () {
+                if ($(this).prop('checked')) {
+                    $('input[name="TeacherRole"]').prop('checked', false);
+                    $('input[name="StudentRole"]').prop('checked', false);
+                }
+            });
+        });
+    </script>
+}
