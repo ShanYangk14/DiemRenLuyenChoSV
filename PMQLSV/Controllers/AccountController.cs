@@ -57,8 +57,10 @@ namespace PMQLSV.Controllers
         }
         public ActionResult Register()
         {
+            ViewBag.Classes = _db.Classes.ToList();
             return View();
         }
+
 
         public ActionResult Login()
         {
@@ -76,7 +78,7 @@ namespace PMQLSV.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterAsync(User _user, bool TeacherRole, bool StudentRole, bool AdminRole)
+        public async Task<ActionResult> RegisterAsync(User _user, bool TeacherRole, bool StudentRole, bool AdminRole, string ClassName, int ClassId, int? ClassSize, string Major)
         {
             try
             {
@@ -112,13 +114,63 @@ namespace PMQLSV.Controllers
                     _db.Users.Add(user);
                     _db.SaveChanges();
 
+                    if (TeacherRole)
+                    {
+                        var newTeacher = new Teacher
+                        {
+                            UserId = user.Id // Use the ID of the newly created user
+                        };
+                        _db.Teachers.Add(newTeacher);
+                        _db.SaveChanges();
+
+                        // Create a new class and assign it to the teacher
+                        var newClass = new Class
+                        {
+                            ClassName = ClassName,
+                            ClassSize = ClassSize.Value,
+                            TeacherId = newTeacher.Id
+                        };
+                        _db.Classes.Add(newClass);
+                        _db.SaveChanges();
+                    }
+                    else if (StudentRole)
+                    {
+                        var selectedClass = await _db.Classes.FirstOrDefaultAsync(c => c.Id == ClassId);
+                        if (selectedClass != null)
+                        {
+                            // Create a new Student object
+                            var newStudent = new Student
+                            {
+                                UserId = user.Id, // Assign the user ID of the newly created user
+                                Major = Major,
+                                ClassId = selectedClass.Id // Assign the retrieved class ID
+                            };
+
+                            // Add the new student to the Students table
+                            _db.Students.Add(newStudent);
+
+                            // Save changes to the database
+                             _db.SaveChanges();
+                        }
+                        else
+                        {
+                            // Handle case where the selected class is not found
+                            ViewBag.error = "Selected class not found.";
+                            return View();
+                        }
+                    }
+                    else if (AdminRole)
+                    {
+                        user.Role = new Role { rolename = "Admin" };
+                    }
+
                     // Assign roles based on the selected checkboxes
                     if (user.Role != null)
                     {
                         await _userManager.AddToRoleAsync(user, user.Role.rolename);
                     }
 
-                    return RedirectToAction("Index" , "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -189,7 +241,7 @@ namespace PMQLSV.Controllers
                     }
                     else if (role == "Student")
                     {
-                        return RedirectToAction("Student", "StudentController");
+                        return RedirectToAction("StudentPage", "Student");
                     }
                     else if (role == "Admin")
                     {

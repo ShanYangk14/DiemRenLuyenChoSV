@@ -53,14 +53,33 @@
                         @Html.CheckBox("AdminRole", false, new { @class = "mr-1" })
                         Admin
                     </div>
+                    <div id="teacherFields" style="display:none;">
+                    <div class="form-group">
+                        @Html.Label("Class Name")
+                        @Html.TextBox("ClassName", "", new { @class = "form-control", @placeholder = "Class Name" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Class Size")
+                        @Html.TextBox("ClassSize", "", new { @class = "form-control", @placeholder = "Class Size" })
+                    </div>
+                     </div>
                     <div id="studentFields" style="display:none;">
-                        <div class="form-group">
+                      @*   <div class="form-group">
                             @Html.LabelFor(m => m.Student.Major)
                             @Html.TextBoxFor(m => m.Student.Major, "", new { @class = "form-control", @placeholder = "Major" })
                         </div>
                         <div class="form-group">
-                            @Html.Label("Class Name")
-                            @Html.TextBox("ClassName", "", new { @class = "form-control", @placeholder = "Class Name" })
+                            @Html.LabelFor(m => m.Student.ClassId)
+                            @Html.DropDownListFor(m => m.Student.ClassId, new SelectList(ViewBag.Classes, "Id", "ClassName"), "Select a Class", new { @class = "form-control" })
+                        </div> *@
+                        <div class="form-group">
+                            @Html.Label("Major")
+                            @Html.TextBox("Major", "", new { @class = "form-control", @placeholder = "Major" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("ClassId")
+                            @Html.DropDownList("ClassId", new SelectList(ViewBag.Classes, "Id", "ClassName"), "Select a Class", new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -79,6 +98,9 @@
                 if ($(this).prop('checked')) {
                     $('input[name="StudentRole"]').prop('checked', false);
                     $('input[name="AdminRole"]').prop('checked', false);
+                    $('#teacherFields').show();
+                } else {
+                    $('#teacherFields').hide();
                 }
             });
 

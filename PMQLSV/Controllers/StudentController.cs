@@ -25,7 +25,21 @@ namespace PMQLSV.Controllers
                 if (roles.Contains("Student"))
                 {
                     _logger.LogInformation("User is authenticated. Access granted to Student page. User: {user}", User.Identity.Name);
-                    return View();
+
+                    // Retrieve student information along with associated class information based on the user's email
+                    var userEmail = User.Identity.Name;
+                    var student = _db.Students
+                        .Include(s => s.User)
+                        .Include(s => s.Class) 
+                        .FirstOrDefault(s => s.User.Email == userEmail);
+
+                    if (student == null)
+                    {
+                        _logger.LogWarning("Student information not found for user: {user}", userEmail);
+                        return RedirectToAction("Error");
+                    }
+
+                    return View(student); // Pass the student model to the view
                 }
                 else
                 {
@@ -39,6 +53,8 @@ namespace PMQLSV.Controllers
                 return RedirectToAction("Error");
             }
         }
+
+
         public IActionResult ScoresAndReviews(int studentId)
         {
             try
