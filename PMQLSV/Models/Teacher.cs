@@ -12,6 +12,5 @@ namespace PMQLSV.Models
         [ForeignKey("UserId")]
         public User User { get; set; }
         public ICollection<Class> Classes { get; set; }
-
     }
 }

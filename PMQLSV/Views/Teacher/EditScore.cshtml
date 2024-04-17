@@ -1,0 +1,38 @@
+﻿@model PMQLSV.Models.Grades
+
+@{
+    ViewData["Title"] = "Edit Score";
+}
+
+<h1>Edit Score</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Cau1" class="control-label">Cau 1</label>
+        <input asp-for="Cau1" class="form-control" />
+        <span asp-validation-for="Cau1" class="text-danger"></span>
+    </div>
+
+    <!-- Add fields for other 'Cau' properties as needed -->
+
+    <div class="form-group">
+        <label asp-for="Grade" class="control-label">Grade</label>
+        <input asp-for="Grade" class="form-control" />
+        <span asp-validation-for="Grade" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Score" class="control-label">Score</label>
+        <input asp-for="Score" class="form-control" />
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StudentId" class="control-label">Student ID</label>
+        <input asp-for="StudentId" class="form-control" disabled />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

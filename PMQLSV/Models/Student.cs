@@ -16,6 +16,6 @@ namespace PMQLSV.Models
         public Class Class { get; set; }
 
         public string Major { get; set; }
-        public ICollection<Grades> Grades { get; set; }
+        public ICollection<Grades> Grades { get; set; } = new List<Grades>();
     }
 }

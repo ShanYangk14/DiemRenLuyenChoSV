@@ -1,0 +1,37 @@
+﻿@model List<PMQLSV.Models.Student>
+
+@{
+    ViewData["Title"] = "Manage Students";
+}
+
+<h1>Manage Students</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>
+                    @await Html.PartialAsync("_FullName", student.User)
+                </td>
+                <td>@student.User.Email</td>
+                <td>@student.Class.ClassName</td>
+                <td>
+                    <a href="@Url.Action("AddScore", "Teacher", new { studentId = student.Id })" class="btn btn-primary">Add Score</a>
+                    @foreach(var score in student.Grades){
+                    <a href="@Url.Action("EditScore", "Teacher", new { gradeId = student.Grades.FirstOrDefault()?.Id })" class="btn btn-secondary">Edit Score</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

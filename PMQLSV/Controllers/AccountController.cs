@@ -237,7 +237,7 @@ namespace PMQLSV.Controllers
                     // Redirect to appropriate action based on role
                     if (role == "Teacher")
                     {
-                        return RedirectToAction("Teacher", "TeacherController");
+                        return RedirectToAction("TeacherPage", "Teacher");
                     }
                     else if (role == "Student")
                     {
@@ -261,7 +261,7 @@ namespace PMQLSV.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Clear();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public static string GetMD5(string str)

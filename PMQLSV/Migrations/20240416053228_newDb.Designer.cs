@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMQLSV.Models;
 
@@ -11,9 +12,11 @@ using PMQLSV.Models;
 namespace PMQLSV.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240416053228_newDb")]
+    partial class newDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,75 +194,6 @@ namespace PMQLSV.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Cau1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau10")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau11")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau12")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau13")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau14")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau15")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau16")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau17")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau18")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau19")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau2")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau20")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau21")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau22")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau23")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau24")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau3")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau4")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau5")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau6")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau7")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau8")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cau9")
                         .HasColumnType("int");
 
                     b.Property<string>("Grade")

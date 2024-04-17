@@ -54,32 +54,31 @@ namespace PMQLSV.Controllers
             }
         }
 
-
-        public IActionResult ScoresAndReviews(int studentId)
+        public IActionResult ScoresAndReviews(int studentId, int Grade)
         {
             try
             {
                 // Fetch the student information, including related grades
                 var student = _db.Students
+                    .Include(s => s.User)
                     .Include(s => s.Grades)
                     .FirstOrDefault(s => s.Id == studentId);
 
-                if (student != null)
+                if (student != null && student.Grades != null && student.Grades.Any())
                 {
                     // Log the event
-                    var fullName = $"{student.User.FirstName} {student.User.LastName}";
+                    string fullName = student.User != null ? $"{student.User.FirstName} {student.User.LastName}" : "Unknown";
                     ViewBag.Message = $"Displaying scores and reviews for student: {fullName}";
 
-                    // Pass the student object to the view
-                    return View(student);
+                    return View(student.Grades); // Pass the grades object to the view
                 }
                 else
                 {
                     // Log the event
-                    ViewBag.Message = $"Student with ID {studentId} not found.";
+                    ViewBag.Message = $"No grade information available for student with ID {studentId}.";
 
-                    // Redirect to a suitable action if student not found
-                    return RedirectToAction("Index", "Home");
+                    // Return the ScoresAndReviews view with no grade information
+                    return View(Enumerable.Empty<Grades>()); // Pass an empty list of grades to the view
                 }
             }
             catch (Exception ex)

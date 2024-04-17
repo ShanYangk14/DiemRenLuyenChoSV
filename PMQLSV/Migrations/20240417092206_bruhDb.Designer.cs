@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMQLSV.Models;
 
@@ -11,9 +12,11 @@ using PMQLSV.Models;
 namespace PMQLSV.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417092206_bruhDb")]
+    partial class bruhDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,83 +194,109 @@ namespace PMQLSV.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Cau1")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau1");
 
                     b.Property<int>("Cau10")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau10");
 
                     b.Property<int>("Cau11")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau11");
 
                     b.Property<int>("Cau12")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau12");
 
                     b.Property<int>("Cau13")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau13");
 
                     b.Property<int>("Cau14")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau14");
 
                     b.Property<int>("Cau15")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau15");
 
                     b.Property<int>("Cau16")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau16");
 
                     b.Property<int>("Cau17")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau17");
 
                     b.Property<int>("Cau18")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau18");
 
                     b.Property<int>("Cau19")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau19");
 
                     b.Property<int>("Cau2")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau2");
 
                     b.Property<int>("Cau20")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau20");
 
                     b.Property<int>("Cau21")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau21");
 
                     b.Property<int>("Cau22")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau22");
 
                     b.Property<int>("Cau23")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau23");
 
                     b.Property<int>("Cau24")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau24");
 
                     b.Property<int>("Cau3")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau3");
 
                     b.Property<int>("Cau4")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau4");
 
                     b.Property<int>("Cau5")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau5");
 
                     b.Property<int>("Cau6")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau6");
 
                     b.Property<int>("Cau7")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau7");
 
                     b.Property<int>("Cau8")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau8");
 
                     b.Property<int>("Cau9")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Cau9");
 
                     b.Property<string>("Grade")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Grade");
 
                     b.Property<int>("Score")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Score");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");

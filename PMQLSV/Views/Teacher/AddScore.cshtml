@@ -1,0 +1,207 @@
+﻿@model PMQLSV.Models.Grades
+
+@{
+    ViewData["Title"] = "AddScore";
+}
+
+<h1>AddScore</h1>
+
+<h4>Grades</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+    @if (User.Identity.IsAuthenticated)
+       {
+        <form method="post" asp-action="AddScore">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Cau1" class="control-label">Câu 1: Có đi học chuyên cần, đúng giờ, nghiêm túc trong giờ học; đủ điều kiện dự thi tất cả các học phần  (Tối đa 5 điểm)</label>
+                <input asp-for="Cau1" class="form-control" />
+                <span asp-validation-for="Cau1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau2" class="control-label">Câu 2: Có đăng ký, thực hiện, báo cáo đề tài nghiên cứu khoa học, tham dự kỳ thi sinh viên giỏi các cấp (tối đa 2 điểm)</label>
+                <input asp-for="Cau2" class="form-control" />
+                <span asp-validation-for="Cau2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau3" class="control-label">Câu 3: Có ý thức tham gia các câu lạc bộ học thuật, các hoạt động học thuật, hoạt động ngoại khóa (tối đa 3 điểm)</label>
+                <input asp-for="Cau3" class="form-control" />
+                <span asp-validation-for="Cau3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau4" class="control-label">Câu 4: Tham dự các buổi hội thảo Nhà trường tổ chức (tối đa 3 điểm)</label>
+                <input asp-for="Cau4" class="form-control" />
+                <span asp-validation-for="Cau4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau5" class="control-label">Câu 5: Tham dự các sự kiện do trường tổ chức (tối đa 2 điểm)</label>
+                <input asp-for="Cau5" class="form-control" />
+                <span asp-validation-for="Cau5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau6" class="control-label">Câu 6: Ý thức và thái độ tham gia các kỳ thi, cuộc thi (tối đa 2 điểm)</label>
+                <input asp-for="Cau6" class="form-control" />
+                <span asp-validation-for="Cau6" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau7" class="control-label">Câu 7: Tinh thần vượt khó, phấn đấu trong học tập (tối đa 1 điểm)</label>
+                <input asp-for="Cau7" class="form-control" />
+                <span asp-validation-for="Cau7" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau8" class="control-label">Câu 8: Kết quả học tập (tối đa 2 điểm)</label>
+                <input asp-for="Cau8" class="form-control" />
+                <span asp-validation-for="Cau8" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau9" class="control-label">Câu 9: Có ý thức chấp hành các văn bản chỉ đạo của ngành, cấp trên được thực hiện trong nhà trường (tối đa 5 điểm)</label>
+                <input asp-for="Cau9" class="form-control" />
+                <span asp-validation-for="Cau9" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau10" class="control-label">Câu 10: Có ý thức tham gia đầy đủ, đạt yêu cầu các cuộc vận động, sinh hoạt chính trị theo chủ trương của cấp trên và nhà trường (tối đa 5 điểm)</label>
+                <input asp-for="Cau10" class="form-control" />
+                <span asp-validation-for="Cau10" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau11" class="control-label">Câu 11: Có ý thức chấp hành nội quy, quy chế và các quy định của nhà trường</label>
+                <input asp-for="Cau11" class="form-control" />
+                <span asp-validation-for="Cau11" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               <label asp-for="Cau12" class="control-label">Câu 12: Có ý thức chấp hành quy định về đóng học phí (tối đa 5 điểm)</label>
+                <input asp-for="Cau12" class="form-control" />
+                <span asp-validation-for="Cau12" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau13" class="control-label">Câu 13: Ý thức tham gia đầy đủ, nghiêm túc hoạt động rèn luyện về chính trị, xã hội, văn hóa, văn nghệ, thể thao do trường tổ chức, điều động (tối đa 10 điểm)</label>
+                <input asp-for="Cau13" class="form-control" />
+                <span asp-validation-for="Cau13" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau14" class="control-label">Câu 14: Ý thức tham gia các hoạt động công ích, tình nguyện, công tác xã hội trong nhà trường (tối đa 5 điểm)</label>
+                <input asp-for="Cau14" class="form-control" />
+                <span asp-validation-for="Cau14" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau15" class="control-label">Câu 15: Ý thức tham gia các hoạt động tuyên truyền, phòng chống tội phạm và các tệ nạn xã hội trong nhà trường (tối đa 5 điểm)</label>
+                <input asp-for="Cau15" class="form-control" />
+                <span asp-validation-for="Cau15" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau16" class="control-label">Câu 16: Có ý thức chấp hành, tham gia tuyên truyền các chủ trương của Đảng, chính sách, pháp luật của Nhà nước (tối đa 4 điểm)</label>
+                <input asp-for="Cau16" class="form-control" />
+                <span asp-validation-for="Cau16" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau17" class="control-label">Câu 17: Có tham gia bảo hiểm y tế (bắt buộc) theo Luật bảo hiểm y tế (không tham gia bảo hiểm y tế (bắt buộc) bị trừ 10 điểm) (tối đa 10 điểm)</label>
+                <input asp-for="Cau17" class="form-control" />
+                <span asp-validation-for="Cau17" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau18" class="control-label">Câu 18: Có ý thức chấp hành, tham gia tuyên truyền các quy định về bảo đảm an toàn giao thông và “văn hóa giao thông”. Có ý thức tham gia các hoạt động xã hội có thành tích được ghi nhận, biểu dương, khen thưởng (tối đa 4 điểm)</label>
+                <input asp-for="Cau18" class="form-control" />
+                <span asp-validation-for="Cau18" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau19" class="control-label">Câu 19:Có ý thức tham gia các hoạt động xã hội, có thành tích được ghi nhận, biểu dương, khen thưởng (tối đa 5 điểm)</label>
+                <input asp-for="Cau19" class="form-control" />
+                <span asp-validation-for="Cau19" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau20" class="control-label">Câu 20: Có tinh thần chia sẻ, giúp đỡ người thân, người có khó khăn, hoạn nạn (tối đa 2 điểm)</label>
+                <input asp-for="Cau20" class="form-control" />
+                <span asp-validation-for="Cau20" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau21" class="control-label">Câu 21: Có ý thức, uy tín và hoàn thành tốt nhiệm vụ trong công tác nhà trường giao (tối đa 2 điểm)</label>
+                <input asp-for="Cau21" class="form-control" />
+                <span asp-validation-for="Cau21" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau22" class="control-label">Câu 22: Có tinh thần hợp tác, giúp đỡ nhau, tôn trọng và tạo môi trường làm việc, học tập lịch sự, văn minh (tối đa 3 điểm)</label>
+                <input asp-for="Cau22" class="form-control" />
+                <span asp-validation-for="Cau22" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau23" class="control-label">Câu 23: Có ý thức bảo vệ môi trường, tiết kiệm nước, năng lượng, sử dụng tài nguyên có hiệu quả (tối đa 3 điểm)</label>
+                <input asp-for="Cau23" class="form-control" />
+                <span asp-validation-for="Cau23" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cau24" class="control-label">Câu 24: Có ý thức bảo vệ môi trường, tham gia các hoạt động bảo vệ môi trường (tối đa 3 điểm)</label>
+                <input asp-for="Cau24" class="form-control" />
+                <span asp-validation-for="Cau24" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+                    <label asp-for="Grade" class="control-label">Grade</label>
+                    <select asp-for="Grade" asp-items="new SelectList(Grades.GradeList)">
+                        <option value="">Select Grade</option>
+                    </select>
+                    <span asp-validation-for="Grade" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentId" class="control-label"></label>
+                <select asp-for="StudentId" class ="form-control" asp-items="ViewBag.StudentId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+<div>
+    <a asp-action="ManageStudent">Back to List</a>
+</div>
+}
+else
+{
+    <p>Please log in to add a score.</p>
+}
+@section scripts 
+{
+    <script>
+                function calculateTotalScore() {
+                    var totalScore = 0;
+                    // Loop through input fields and calculate total score
+                    for (var i = 1; i <= 25; i++) {
+                        var value = parseInt($('#Cau' + i).val()) || 0;
+                        if (value < 0) {
+                            alert("Please enter a value greater than or equal to 0 for Cau" + i);
+                            return;
+                        }
+                        totalScore += value;
+                    }
+                    $('#Score').val(totalScore); // Set the total score
+                }
+                $(document).ready(function () {
+            // Set default value to 0 for empty input fields
+            $('.form-control').each(function () {
+                if ($(this).val() === '') {
+                    $(this).val(0);
+                }
+            });
+
+            // Trigger the input event on input change to recalculate total score
+            $('.form-control').on('input', function () {
+                calculateTotalScore();
+            });
+
+            // Call calculateTotalScore when the form is submitted
+            $('form').submit(function () {
+                // Before submitting the form, convert input values to integers
+                $('.form-control').each(function () {
+                    var value = parseInt($(this).val()) || 0;
+                    $(this).val(value); // Set the value of the input field to the parsed integer
+                });
+                calculateTotalScore();
+            });
+        });
+
+    </script>
+}
+
