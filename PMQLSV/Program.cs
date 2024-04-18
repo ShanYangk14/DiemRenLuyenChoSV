@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +81,10 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "Home",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Account",
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.MapControllerRoute(
     name: "Admin",

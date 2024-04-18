@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PMQLSV.Models;
+using System.Linq;
 using System.Security.Claims;
 
 namespace PMQLSV.Controllers
@@ -12,11 +14,17 @@ namespace PMQLSV.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SchoolDbContext _db;
-        public StudentController(ILogger<HomeController> logger, SchoolDbContext db)
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+
+        public StudentController(ILogger<HomeController> logger, SchoolDbContext db, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _logger = logger;
             _db = db;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
+
         public IActionResult StudentPage()
         {
             try
@@ -30,7 +38,9 @@ namespace PMQLSV.Controllers
                     var userEmail = User.Identity.Name;
                     var student = _db.Students
                         .Include(s => s.User)
-                        .Include(s => s.Class) 
+                        .Include(s => s.Class)
+                            .ThenInclude(c => c.Teacher)
+                            .ThenInclude(t => t.User)
                         .FirstOrDefault(s => s.User.Email == userEmail);
 
                     if (student == null)
@@ -39,58 +49,47 @@ namespace PMQLSV.Controllers
                         return RedirectToAction("Error");
                     }
 
-                    return View(student); // Pass the student model to the view
+                    return View(student); // Display student information
                 }
                 else
                 {
                     _logger.LogWarning("Access to Student page denied. User not authenticated.");
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred in the Student action.");
+                _logger.LogError(ex, "An error occurred in the StudentPage action.");
                 return RedirectToAction("Error");
             }
         }
 
-        public IActionResult ScoresAndReviews(int studentId, int Grade)
+        [HttpGet]
+        public IActionResult ScoresAndReviews()
         {
             try
             {
-                // Fetch the student information, including related grades
+                var userEmail = User.Identity.Name;
                 var student = _db.Students
                     .Include(s => s.User)
-                    .Include(s => s.Grades)
-                    .FirstOrDefault(s => s.Id == studentId);
+                    .Include(s => s.Class)
+                        .ThenInclude(c => c.Teacher)
+                    .Include(s => s.Grades) // Include grades related to the student
+                    .FirstOrDefault(s => s.User.Email == userEmail);
 
-                if (student != null && student.Grades != null && student.Grades.Any())
+                if (student == null)
                 {
-                    // Log the event
-                    string fullName = student.User != null ? $"{student.User.FirstName} {student.User.LastName}" : "Unknown";
-                    ViewBag.Message = $"Displaying scores and reviews for student: {fullName}";
-
-                    return View(student.Grades); // Pass the grades object to the view
+                    _logger.LogWarning("Student information not found for user: {user}", userEmail);
+                    return RedirectToAction("Error");
                 }
-                else
-                {
-                    // Log the event
-                    ViewBag.Message = $"No grade information available for student with ID {studentId}.";
 
-                    // Return the ScoresAndReviews view with no grade information
-                    return View(Enumerable.Empty<Grades>()); // Pass an empty list of grades to the view
-                }
+                return View(student.Grades); // Pass grades associated with the student to the view
             }
             catch (Exception ex)
             {
-                // Log the error
-                ViewBag.Message = "An error occurred while displaying scores and reviews for student.";
-
-                // Redirect to an error page
-                return RedirectToAction("Error", "Home");
+                _logger.LogError(ex, "An error occurred in the ScoresAndReviews action.");
+                return RedirectToAction("Error");
             }
         }
     }
 }
-    
-

@@ -32,7 +32,7 @@ namespace PMQLSV.Controllers
             else
             {
 
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Account");
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,14 @@ namespace PMQLSV.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SchoolDbContext _db;
-        public TeacherController(ILogger<HomeController> logger, SchoolDbContext db)
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        public TeacherController(ILogger<HomeController> logger, SchoolDbContext db, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _logger = logger;
             _db = db;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult TeacherPage()
@@ -42,7 +47,7 @@ namespace PMQLSV.Controllers
                 else
                 {
                     _logger.LogWarning("Access to Teacher page denied. User not authenticated.");
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             catch (Exception ex)
@@ -85,8 +90,8 @@ namespace PMQLSV.Controllers
                 }
                 else
                 {
-                    _logger.LogWarning("Access to Manage Student page denied. User not authenticated.");
-                    return RedirectToAction("Login");
+                    _logger.LogWarning("Access to Manage Teacher page denied. User not authenticated.");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             catch (Exception ex)

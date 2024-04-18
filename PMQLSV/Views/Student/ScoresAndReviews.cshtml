@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PMQLSV.Models.Grades>
 
 @{
-    ViewData["Title"] = "ScoresAndReviews";
+    ViewData["Title"] = "Scores And Reviews";
 }
 
 <h1>Scores And Reviews for @Html.Partial("_Studentname", Model.FirstOrDefault()?.Student.User)</h1>
@@ -27,148 +27,17 @@
                     @Html.DisplayFor(model => grade.Score)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau1)
+                    Graded By:
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau1)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau2)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau2)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau3)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau3)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau4)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau4)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau5)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau5)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau6)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau6)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau7)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau7)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau8)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau8)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau9)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau9)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau10)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau10)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau11)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau11)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau12)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau12)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau13)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau13)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau14)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau14)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau15)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau15)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau16)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau16)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau17)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau17)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau18)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau18)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau19)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau19)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau20)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau20)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau21)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau21)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau22)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau22)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau23)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau23)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => grade.Cau24)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => grade.Cau24)
+                    @if (grade.Student?.Class?.Teacher?.User != null)
+                    {
+                        @Html.Partial("_FullName", grade.Student.Class.Teacher.User)
+                    }
+                    else
+                    {
+                        <span>Teacher name unavailable</span>
+                    }
                 </dd>
             }
         </dl>

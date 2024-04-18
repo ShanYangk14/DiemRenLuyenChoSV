@@ -245,7 +245,7 @@ namespace PMQLSV.Controllers
                     }
                     else if (role == "Admin")
                     {
-                        return RedirectToAction("Admin", "AdminController");
+                        return RedirectToAction("AdminPage", "Admin");
                     }
                 }
                 else
