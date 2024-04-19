@@ -17,14 +17,14 @@ namespace PMQLSV.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<AccountController> _logger;
         private readonly SchoolDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly SchoolDbContext _context;
         private readonly RoleManager<IdentityRole<int>> _roleManager;
 
-        public AccountController(ILogger<HomeController> logger, SchoolDbContext db, UserManager<User> userManager, SignInManager<User> signInManager, SchoolDbContext context, RoleManager<IdentityRole<int>> roleManager)
+        public AccountController(ILogger<AccountController> logger, SchoolDbContext db, UserManager<User> userManager, SignInManager<User> signInManager, SchoolDbContext context, RoleManager<IdentityRole<int>> roleManager)
         {
             _logger = logger;
             _db = db;
@@ -55,6 +55,8 @@ namespace PMQLSV.Controllers
                 IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
             }
         }
+
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Policy = "AdminPolicy")]
         public ActionResult Register()
         {
             ViewBag.Classes = _db.Classes.ToList();
@@ -76,6 +78,7 @@ namespace PMQLSV.Controllers
             }
         }
 
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Policy = "AdminPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterAsync(User _user, bool TeacherRole, bool StudentRole, bool AdminRole, string ClassName, int ClassId, int? ClassSize, string Major)

@@ -4,6 +4,80 @@
     ViewData["Title"] = "AddScore";
 }
 
+<style>
+    .hidden-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .page-title {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-heading {
+        font-size: 20px;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .back-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    .text-danger {
+        color: red;
+    }
+</style>
+
 <h1>AddScore</h1>
 
 <h4>Grades</h4>
@@ -65,7 +139,7 @@
                 <span asp-validation-for="Cau10" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cau11" class="control-label">Câu 11: Có ý thức chấp hành nội quy, quy chế và các quy định của nhà trường</label>
+                    <label asp-for="Cau11" class="control-label">Câu 11: Có ý thức chấp hành nội quy, quy chế và các quy định của nhà trường(tối đa 10 điểm)</label>
                 <input asp-for="Cau11" class="form-control" />
                 <span asp-validation-for="Cau11" class="text-danger"></span>
             </div>
@@ -115,22 +189,22 @@
                 <span asp-validation-for="Cau20" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cau21" class="control-label">Câu 21: Có ý thức, uy tín và hoàn thành tốt nhiệm vụ trong công tác nhà trường giao (tối đa 2 điểm)</label>
+                <label asp-for="Cau21" class="control-label">Câu 21: Có ý thức, uy tín và hoàn thành tốt nhiệm vụ quản lý lớp, các tổ chức Đảng, Đoàn thanh niên, Hội sinh viên, tổ chức khác trong nhà trường (tối đa 3 điểm)</label>
                 <input asp-for="Cau21" class="form-control" />
                 <span asp-validation-for="Cau21" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cau22" class="control-label">Câu 22: Có tinh thần hợp tác, giúp đỡ nhau, tôn trọng và tạo môi trường làm việc, học tập lịch sự, văn minh (tối đa 3 điểm)</label>
+                <label asp-for="Cau22" class="control-label">Câu 22: Kỹ năng tổ chức, quản lý lớp, quản lý các hoạt động lớp, trường (tối đa 3 điểm)</label>
                 <input asp-for="Cau22" class="form-control" />
                 <span asp-validation-for="Cau22" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cau23" class="control-label">Câu 23: Có ý thức bảo vệ môi trường, tiết kiệm nước, năng lượng, sử dụng tài nguyên có hiệu quả (tối đa 3 điểm)</label>
+                    <label asp-for="Cau23" class="control-label">Hỗ trợ và tham gia tích cực các hoạt động chung của tập thể lớp, khoa, trường(tối đa 3 điểm)</label>
                 <input asp-for="Cau23" class="form-control" />
                 <span asp-validation-for="Cau23" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cau24" class="control-label">Câu 24: Có ý thức bảo vệ môi trường, tham gia các hoạt động bảo vệ môi trường (tối đa 3 điểm)</label>
+                    <label asp-for="Cau24" class="control-label">Câu 24: Sinh viên đặt được các thành tích đặc biệt trong học tập(tối đa 1 điểm)</label>
                 <input asp-for="Cau24" class="form-control" />
                 <span asp-validation-for="Cau24" class="text-danger"></span>
             </div>
@@ -146,10 +220,10 @@
                 <input asp-for="Score" class="form-control" />
                 <span asp-validation-for="Score" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="StudentId" class="control-label"></label>
-                <select asp-for="StudentId" class ="form-control" asp-items="ViewBag.StudentId"></select>
-            </div>
+                <div class="form-group">
+                    <label asp-for="StudentId" typeof="hidden" class="hidden-label"></label>
+                    <input type="hidden" asp-for="StudentId" />
+                </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -168,7 +242,7 @@ else
                 function calculateTotalScore() {
                     var totalScore = 0;
                     // Loop through input fields and calculate total score
-                    for (var i = 1; i <= 25; i++) {
+                    for (var i = 1; i <= 24; i++) {
                         var value = parseInt($('#Cau' + i).val()) || 0;
                         if (value < 0) {
                             alert("Please enter a value greater than or equal to 0 for Cau" + i);

@@ -1,0 +1,73 @@
+﻿@model List<Teacher>
+
+@{
+    ViewData["Title"] = "Teachers Management";
+}
+
+<h1>Teachers Management</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-teachers">
+        <thead class="thead-teachers">
+            <tr>
+                <th>Teacher ID</th>
+                <th>Email</th>
+                <th>Full Name</th>
+                <!-- Add more columns if needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var teacher in Model)
+            {
+                <tr>
+                    <td>@teacher.Id</td>
+                    <td>@teacher.User.Email</td>
+                    <td>@Html.Partial("_FullName", teacher.User)</td>
+                    <!-- Add more columns if needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-teachers {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table-teachers th,
+        .table-teachers td {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table-teachers thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table-teachers tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .table-teachers tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Light gray background for odd rows */
+        }
+
+        .table-teachers th {
+            background-color: #007bff; /* Blue header background */
+            color: #fff; /* White text */
+        }
+
+    .table-teachers-bordered th,
+    .table-teachers-bordered td {
+        border: 1px solid #dee2e6;
+    }
+
+    .table-teachers-bordered thead th,
+    .table-teachers-bordered thead td {
+        border-bottom-width: 2px;
+    }
+</style>

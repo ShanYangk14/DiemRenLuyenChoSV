@@ -12,11 +12,11 @@ namespace PMQLSV.Controllers
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Policy = "TeacherPolicy")]
     public class TeacherController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<TeacherController> _logger;
         private readonly SchoolDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public TeacherController(ILogger<HomeController> logger, SchoolDbContext db, UserManager<User> userManager, SignInManager<User> signInManager)
+        public TeacherController(ILogger<TeacherController> logger, SchoolDbContext db, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _logger = logger;
             _db = db;
@@ -171,7 +171,7 @@ namespace PMQLSV.Controllers
             }
         }
 
-        public IActionResult EditScore(int gradeId)
+        public IActionResult EditScore(int gradeId, int studentId)
         {
             try
             {
@@ -184,6 +184,13 @@ namespace PMQLSV.Controllers
                     return RedirectToAction("Error");
                 }
 
+                var studentsList = _db.Students.Select(s => new SelectListItem
+                {
+                    Text = s.Id.ToString(),
+                    Value = s.Id.ToString()
+                }).ToList();
+                ViewBag.StudentId = new SelectList(studentsList, "Value", "Text", studentId);
+
                 return View(grade);
             }
             catch (Exception ex)
@@ -194,20 +201,20 @@ namespace PMQLSV.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditScore(Grades grade)
+        public IActionResult EditScore(Grades grades)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     // Update the grade in the database
-                    _db.Grades.Update(grade);
+                    _db.Grades.Update(grades);
                     _db.SaveChanges();
 
                     return RedirectToAction("ManageStudent");
                 }
 
-                return View(grade);
+                return View(grades);
             }
             catch (Exception ex)
             {
@@ -215,6 +222,5 @@ namespace PMQLSV.Controllers
                 return RedirectToAction("Error");
             }
         }
-
     }
 }

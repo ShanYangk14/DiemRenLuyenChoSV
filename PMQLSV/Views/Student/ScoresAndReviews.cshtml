@@ -3,41 +3,215 @@
 @{
     ViewData["Title"] = "Scores And Reviews";
 }
+<style>
+    .page-title {
+        color: #4CAF50; /* Green */
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-<h1>Scores And Reviews for @Html.Partial("_Studentname", Model.FirstOrDefault()?.Student.User)</h1>
+    /* Grades container styling */
+    .grades-container {
+        margin-bottom: 30px;
+    }
+
+    /* Grades heading styling */
+    .grades-heading {
+        color: #4CAF50; /* Green */
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Grades divider styling */
+    .grades-divider {
+        border-top: 2px solid #4CAF50; /* Green */
+        margin-top: 5px;
+    }
+
+    /* Grade criteria styling */
+    .grade-criteria {
+        color: #FF5722; /* Deep Orange */
+        font-weight: bold;
+    }
+
+    /* Grade value styling */
+    .grade-value {
+        color: #333; /* Black */
+        margin-bottom: 10px;
+    }
+
+    /* Grade info styling */
+    .grade-info {
+        color: #FF5722; /* Deep Orange */
+        font-weight: bold;
+    }
+</style>
+
+<h1 class="page-title">@Html.Partial("_Studentname", Model.FirstOrDefault()?.Student.User)</h1>
 
 @if (Model.Any())
 {
-    <div>
-        <h4>Grades</h4>
-        <hr />
-        <dl class="row">
+    <div class="grades-container">
+        <h4 class="grades-heading">Grades</h4>
+        <hr class="grades-divider" />
+        <dl class="row grades-list">
             @foreach (var grade in Model)
             {
-                <dt class="col-sm-2">
+                <dt class="grade-criteria">
+                    Câu 1: Có đi học chuyên cần, đúng giờ, nghiêm túc trong giờ học; đủ điều kiện dự thi tất cả các học phần  (Tối đa 5 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau1)
+                </dd>
+                <dt class ="grade-criteria">
+                    Câu 2: Có đăng ký, thực hiện, báo cáo đề tài nghiên cứu khoa học, tham dự kỳ thi sinh viên giỏi các cấp (tối đa 2 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau2)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 3: Có ý thức tham gia các câu lạc bộ học thuật, các hoạt động học thuật, hoạt động ngoại khóa (tối đa 3 điểm)
+                </dt>
+                <dd class=" grade-valuecol-sm-10">
+                    @Html.DisplayFor(model => grade.Cau3)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 4: Tham dự các buổi hội thảo Nhà trường tổ chức (tối đa 3 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau4)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 5: Tham dự các sự kiện do trường tổ chức (tối đa 2 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau5)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 6: Ý thức và thái độ tham gia các kỳ thi, cuộc thi (tối đa 2 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau6)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 7: Tinh thần vượt khó, phấn đấu trong học tập (tối đa 1 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau7)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 8: Kết quả học tập (tối đa 2 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau8)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 9: Có ý thức chấp hành các văn bản chỉ đạo của ngành, cấp trên được thực hiện trong nhà trường (tối đa 5 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau9)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 10: Có ý thức tham gia đầy đủ, đạt yêu cầu các cuộc vận động, sinh hoạt chính trị theo chủ trương của cấp trên và nhà trường (tối đa 5 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau10)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 11: Có ý thức chấp hành nội quy, quy chế và các quy định của nhà trường(tối đa 10 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau11)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 12: Có ý thức chấp hành quy định về đóng học phí (tối đa 5 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau12)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 13: Ý thức tham gia đầy đủ, nghiêm túc hoạt động rèn luyện về chính trị, xã hội, văn hóa, văn nghệ, thể thao do trường tổ chức, điều động (tối đa 10 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau13)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 14: Ý thức tham gia các hoạt động công ích, tình nguyện, công tác xã hội trong nhà trường (tối đa 5 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau14)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 15: Ý thức tham gia các hoạt động tuyên truyền, phòng chống tội phạm và các tệ nạn xã hội trong nhà trường (tối đa 5 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau15)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 16: Có ý thức chấp hành, tham gia tuyên truyền các chủ trương của Đảng, chính sách, pháp luật của Nhà nước (tối đa 4 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau16)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 17: Có tham gia bảo hiểm y tế (bắt buộc) theo Luật bảo hiểm y tế (không tham gia bảo hiểm y tế (bắt buộc) bị trừ 10 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau17)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 18: Có ý thức chấp hành, tham gia tuyên truyền các quy định về bảo đảm an toàn giao thông và “văn hóa giao thông”. Có ý thức tham gia các hoạt động xã hội có thành tích được ghi nhận, biểu dương, khen thưởng (tối đa 4 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau18)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 19:Có ý thức tham gia các hoạt động xã hội, có thành tích được ghi nhận, biểu dương, khen thưởng (tối đa 5 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau19)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 20: Có tinh thần chia sẻ, giúp đỡ người thân, người có khó khăn, hoạn nạn (tối đa 2 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau20)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 21: Có ý thức, uy tín và hoàn thành tốt nhiệm vụ quản lý lớp, các tổ chức Đảng, Đoàn thanh niên, Hội sinh viên, tổ chức khác trong nhà trường (tối đa 3 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau21)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 22: Kỹ năng tổ chức, quản lý lớp, quản lý các hoạt động lớp, trường (tối đa 3 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau22)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 23: Hỗ trợ và tham gia tích cực các hoạt động chung của tập thể lớp, khoa, trường(tối đa 3 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau23)
+                </dd>
+                <dt class="grade-criteria">
+                    Câu 24: Sinh viên đặt được các thành tích đặc biệt trong học tập(tối đa 1 điểm)
+                </dt>
+                <dd class="grade-value col-sm-10">
+                    @Html.DisplayFor(model => grade.Cau24)
+                </dd>
+                <dt class="grade-info">
                     Grade:
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="grade-value col-sm-10">
                     @Html.DisplayFor(model => grade.Grade)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="grade-info">
                     Score:
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="grade-value col-sm-10">
                     @Html.DisplayFor(model => grade.Score)
-                </dd>
-                <dt class="col-sm-2">
-                    Graded By:
-                </dt>
-                <dd class="col-sm-10">
-                    @if (grade.Student?.Class?.Teacher?.User != null)
-                    {
-                        @Html.Partial("_FullName", grade.Student.Class.Teacher.User)
-                    }
-                    else
-                    {
-                        <span>Teacher name unavailable</span>
-                    }
                 </dd>
             }
         </dl>

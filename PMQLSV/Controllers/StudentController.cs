@@ -12,17 +12,13 @@ namespace PMQLSV.Controllers
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Policy = "StudentPolicy")]
     public class StudentController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<StudentController> _logger;
         private readonly SchoolDbContext _db;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
 
-        public StudentController(ILogger<HomeController> logger, SchoolDbContext db, UserManager<User> userManager, SignInManager<User> signInManager)
+        public StudentController(ILogger<StudentController> logger, SchoolDbContext db)
         {
             _logger = logger;
             _db = db;
-            _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         public IActionResult StudentPage()
