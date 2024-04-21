@@ -2,7 +2,63 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .display-4 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        .school-image {
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-text {
+            font-size: 1.2rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .decorative-line {
+            border-top: 2px solid #007bff;
+            margin: 40px auto;
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4">Welcome to SIU</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Mat_tien_SIU.jpg/1200px-Mat_tien_SIU.jpg" alt="School Image" class="school-image">
+        <p class="info-text">Explore our programs, faculty, and campus life to discover why SIU is the perfect place for your academic journey.</p>
+        <div class="decorative-line"></div>
+    </div>
+</body>
+</html>

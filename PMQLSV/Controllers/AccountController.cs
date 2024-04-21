@@ -342,6 +342,5 @@ namespace PMQLSV.Controllers
 
             return RedirectToAction("InvalidToken");
         }
-
     }
 }
