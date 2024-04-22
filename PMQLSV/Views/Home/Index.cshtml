@@ -1,39 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
+    <title>Welcome to SIU</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f0f0f0; 
             margin: 0;
             padding: 0;
         }
 
         .container {
             width: 100%;
-            max-width: 800px;
+            height: 80%;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .display-4 {
             font-size: 3rem;
             margin-bottom: 20px;
-            color: #343a40;
+            color: red;
         }
 
         .school-image {
+            width: 100%;
+            height: 80%;
+            max-width: 1300px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -51,6 +49,28 @@
             margin: 40px auto;
             max-width: 100px;
         }
+
+        .service {
+            margin-top: 40px;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #007bff;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #343a40;
+        }
+
+        .service-description {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -58,7 +78,22 @@
         <h1 class="display-4">Welcome to SIU</h1>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Mat_tien_SIU.jpg/1200px-Mat_tien_SIU.jpg" alt="School Image" class="school-image">
         <p class="info-text">Explore our programs, faculty, and campus life to discover why SIU is the perfect place for your academic journey.</p>
-        <div class="decorative-line"></div>
+        <hr class="decorative-line">
+        <div class="service">
+            <i class="fas fa-book-open service-icon"></i>
+            <h2 class="service-title">Academic Programs</h2>
+            <p class="service-description">Discover our wide range of academic programs designed to meet the diverse needs and interests of our students.</p>
+        </div>
+        <div class="service">
+            <i class="fas fa-chalkboard-teacher service-icon"></i>
+            <h2 class="service-title">Experienced Faculty</h2>
+            <p class="service-description">Learn from our team of experienced faculty members who are dedicated to providing quality education and mentorship.</p>
+        </div>
+        <div class="service">
+            <i class="fas fa-university service-icon"></i>
+            <h2 class="service-title">Campus Life</h2>
+            <p class="service-description">Immerse yourself in our vibrant campus community filled with clubs, events, and activities to enhance your college experience.</p>
+        </div>
     </div>
 </body>
 </html>

@@ -46,5 +46,13 @@ namespace PMQLSV.Controllers
                 .ToList();
             return View(teachersManage);
         }
+
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _db.Users.Find(id);
+            _db.Users.Remove(user);
+            _db.SaveChanges();
+            return RedirectToAction("AdminPage");
+        }
     }
 }

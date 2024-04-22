@@ -30,6 +30,9 @@
                         <td>@grade.Grade</td>
                         <td>@grade.Score</td>
                     }
+                    <td>
+                        <a href="@Url.Action("DeleteUser", "Admin", new { id = @student.UserId })">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>

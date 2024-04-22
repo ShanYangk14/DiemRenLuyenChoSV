@@ -24,6 +24,9 @@
                     <td>@teacher.User.Email</td>
                     <td>@Html.Partial("_FullName", teacher.User)</td>
                     <!-- Add more columns if needed -->
+                    <td>
+                        <a href="@Url.Action("DeleteUser", "Admin", new { id = teacher.UserId })">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>

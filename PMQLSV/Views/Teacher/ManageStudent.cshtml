@@ -76,7 +76,10 @@
                     <td>@grade.Score</td>
                 }
                 <td>
-                    <a href="@Url.Action("AddScore", "Teacher", new { studentId = student.Id })" class="btn btn-primary">Add Score</a>
+                    @if (student.Grades.Count() == 0)
+                    {
+                        <a href="@Url.Action("AddScore", "Teacher", new { studentId = student.Id })" class="btn btn-primary">Add Score</a>
+                    }
                     @foreach (var score in student.Grades)
                     {
                         <a href="@Url.Action("EditScore", "Teacher", new { gradeId = score.Id })" class="btn btn-secondary">Edit Score</a>

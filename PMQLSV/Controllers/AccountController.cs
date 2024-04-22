@@ -173,7 +173,7 @@ namespace PMQLSV.Controllers
                         await _userManager.AddToRoleAsync(user, user.Role.rolename);
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AdminPage", "Admin");
                 }
                 else
                 {

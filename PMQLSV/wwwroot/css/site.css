@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+footer.footer {
+    margin-top: auto; /* Push the footer to the bottom */
+    height: 40px; /* Adjust the height of the footer */
+    line-height: 40px; /* Center the content vertically */
+}
