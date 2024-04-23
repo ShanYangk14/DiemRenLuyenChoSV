@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +58,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
+var env = app.Services.GetRequiredService<IWebHostEnvironment>();
+
+// Ensure the directory for static files exists
+var gltfDirectory = Path.Combine(env.ContentRootPath, "wwwroot", "models", "gltf");
+if (!Directory.Exists(gltfDirectory))
+{
+    Directory.CreateDirectory(gltfDirectory);
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -65,6 +76,20 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(gltfDirectory),
+    RequestPath = "/models/gltf",
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings =
+        {
+            [".glb"] = "model/gltf+binary",
+            [".gltf"] = "model/gltf+json"
+        }
+    }
+});
 
 app.UseRouting();
 

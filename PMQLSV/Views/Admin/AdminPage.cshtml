@@ -1,4 +1,5 @@
 ﻿@{
+    Layout = "_Layout";
     ViewData["Title"] = "AdminPage";
 }
 
@@ -13,14 +14,27 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa; /* Background color */
-            padding: 20px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide overflow to prevent scroll bars */
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        #container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
+        #content {
+            position: relative;
+            z-index: 1;
+            padding-top: 80px; /* Adjust this value based on your navbar height */
+        }
+
+        /* Additional styles for your content */
         .admin-heading {
             text-align: center;
             margin-bottom: 30px;
@@ -54,5 +68,88 @@
             <a class="btn btn-primary registration-button" asp-area="" asp-controller="Account" asp-action="Register">Registration for User</a>
         </div>
     </div>
+    <div id="container"></div>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "../build/three.module.js",
+                "three/addons/": "./jsm/"
+            }
+        }
+    </script>
 </body>
 </html>
+<script src="~/js/stats.js"></script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from '/jsm/controls/OrbitControls.js';
+    import { RoomEnvironment } from '/jsm/environments/RoomEnvironment.js';
+    import { GLTFLoader } from '/jsm/loaders/GLTFLoader.js';
+    import { DRACOLoader } from '/jsm/loaders/DRACOLoader.js';
+
+    let mixer;
+
+    const clock = new THREE.Clock();
+    const container = document.getElementById('container');
+
+    const stats = new Stats();
+    container.appendChild(stats.dom);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.appendChild(renderer.domElement);
+
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf0f0f0);
+    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+
+    const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100);
+    camera.position.set(5, 15, 10);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 0.5, 0);
+    controls.update();
+    controls.enablePan = false;
+    controls.enableDamping = true;
+
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('jsm/libs/draco/gltf/');
+
+    const loader = new GLTFLoader();
+    loader.setDRACOLoader(dracoLoader);
+    loader.load('/models/gltf/office_building.glb', function (gltf) {
+        const model = gltf.scene;
+        model.position.set(0, 0, 0);
+        model.scale.set(0.01, 0.01, 0.01);
+        scene.add(model);
+
+        if (gltf.animations && gltf.animations.length > 0) {
+            mixer = new THREE.AnimationMixer(model);
+            mixer.clipAction(gltf.animations[0]).play();
+        }
+
+        animate();
+    }, undefined, function (e) {
+        console.error(e);
+    });
+
+    window.onresize = function () {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const delta = clock.getDelta();
+        mixer && mixer.update(delta);
+        controls.update();
+        stats.update();
+        stats.showPanel(0);
+        renderer.render(scene, camera);
+    }
+</script>

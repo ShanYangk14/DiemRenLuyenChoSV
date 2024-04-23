@@ -31,7 +31,9 @@
                         <td>@grade.Score</td>
                     }
                     <td>
-                        <a href="@Url.Action("DeleteUser", "Admin", new { id = @student.UserId })">Delete</a>
+                        <form action="@Url.Action("DeleteUser", "Admin", new { id = @student.UserId })" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             }
@@ -102,4 +104,16 @@
         background-color: #343a40;
         border-color: #454d55;
     }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #e74c3c; /* Rose red color */
+        border-color: #e74c3c; /* Matching border color */
+    }
+
+        .btn-danger:hover {
+            background-color: #c0392b; /* Darker shade of rose red on hover */
+            border-color: #c0392b; /* Matching border color on hover */
+        }
+
 </style>

@@ -220,6 +220,17 @@
                 totalScore += value;
             }
             $('#Score').val(totalScore); // Set the total score
+            var grade = '';
+            if (totalScore >= 85) {
+                grade = 'Loai Gioi';
+            } else if (totalScore >= 70 && totalScore <= 84) {
+                grade = 'Loai Kha';
+            } else if (totalScore >= 50 && totalScore <= 69) {
+                grade = 'Loai Trung binh';
+            } else if (totalScore <= 49) {
+                grade = 'Loai Yeu';
+            }
+            $('#Grade').val(grade); // Set the grade
         }
         $(document).ready(function () {
             // Set default value to 0 for empty input fields

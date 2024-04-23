@@ -25,7 +25,9 @@
                     <td>@Html.Partial("_FullName", teacher.User)</td>
                     <!-- Add more columns if needed -->
                     <td>
-                        <a href="@Url.Action("DeleteUser", "Admin", new { id = teacher.UserId })">Delete</a>
+                        <form action="@Url.Action("DeleteUser", "Admin", new { id = @teacher.UserId })" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             }
@@ -73,4 +75,15 @@
     .table-teachers-bordered thead td {
         border-bottom-width: 2px;
     }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #e74c3c; /* Rose red color */
+        border-color: #e74c3c; /* Matching border color */
+    }
+
+        .btn-danger:hover {
+            background-color: #c0392b; /* Darker shade of rose red on hover */
+            border-color: #c0392b; /* Matching border color on hover */
+        }
 </style>
